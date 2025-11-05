@@ -1,0 +1,260 @@
+##Код на Python:
+
+def is_sorted(arr, index=0):
+    if len(arr) <= 1 or index == len(arr) - 1:
+        return True
+    
+    if arr[index] > arr[index + 1]:
+        return False
+    
+    return is_sorted(arr, index + 1)
+
+def main():
+    print("Проверка отсортированности массива рекурсивным методом")
+    print("Введите элементы целочисленного массива через пробел")
+    print("Пример ввода: 1 2 3 4 5")
+    
+    try:
+        user_input = input("Ваш ввод: ").strip()
+        
+        if not user_input:
+            print("Ошибка ввода: пустая строка")
+            return
+            
+        arr = list(map(int, user_input.split()))
+        
+        print("\nОбработка данных")
+        print(f"Получен массив: {arr}")
+        print(f"Размер массива: {len(arr)} элементов")
+        
+        print("Запуск рекурсивной проверки")
+        result = is_sorted(arr)
+        
+        print("\n" + "=" * 50)
+        print("РЕЗУЛЬТАТ ПРОВЕРКИ")
+        print("=" * 50)
+        print(f"Анализируемый массив: {arr}")
+        print(f"Количество элементов: {len(arr)}")
+        print(f"Состояние массива: {'ОТСОРТИРОВАН ПО ВОЗРАСТАНИЮ' if result else 'НЕ ОТСОРТИРОВАН'}")
+        
+        print("\nАНАЛИЗ СЛОЖНОСТИ")
+        print("Временная сложность: O(n)")
+        print("Пространственная сложность: O(n)")
+        print(f"Фактическое количество проверок: {len(arr) - 1 if len(arr) > 1 else 0}")
+        
+    except ValueError:
+        print("Ошибка преобразования: убедитесь что введены только целые числа")
+    except Exception as e:
+        print(f"Неожиданная ошибка: {e}")
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
+##Код на С++:
+
+
+#include <iostream>
+#include <vector>
+#include <sstream>
+#include <string>
+
+using namespace std;
+
+bool isSorted(const vector<int>& arr, int index = 0) {
+    if (arr.size() <= 1 || index == arr.size() - 1) {
+        return true;
+    }
+    
+    if (arr[index] > arr[index + 1]) {
+        return false;
+    }
+    
+    return isSorted(arr, index + 1);
+}
+
+vector<int> parseInput(const string& input) {
+    vector<int> result;
+    stringstream ss(input);
+    int number;
+    
+    while (ss >> number) {
+        result.push_back(number);
+    }
+    
+    return result;
+}
+
+void printArray(const vector<int>& arr) {
+    cout << "[";
+    for (size_t i = 0; i < arr.size(); ++i) {
+        cout << arr[i];
+        if (i < arr.size() - 1) {
+            cout << ", ";
+        }
+    }
+    cout << "]";
+}
+
+int main() {
+    cout << "Проверка отсортированности массива рекурсивным методом" << endl;
+    cout << "Введите элементы целочисленного массива через пробел" << endl;
+    cout << "Пример ввода: 1 2 3 4 5" << endl;
+    cout << "Ваш ввод: ";
+    
+    string input;
+    getline(cin, input);
+    
+    if (input.empty()) {
+        cout << "Ошибка ввода: пустая строка" << endl;
+        return 1;
+    }
+    
+    try {
+        vector<int> arr = parseInput(input);
+        
+        if (arr.empty()) {
+            cout << "Ошибка: не удалось распознать целые числа в вводе" << endl;
+            return 1;
+        }
+        
+        cout << "\nОбработка данных" << endl;
+        cout << "Получен массив: ";
+        printArray(arr);
+        cout << endl;
+        cout << "Размер массива: " << arr.size() << " элементов" << endl;
+        
+        cout << "Запуск рекурсивной проверки" << endl;
+        bool result = isSorted(arr);
+        
+        cout << "\n" << string(50, '=') << endl;
+        cout << "РЕЗУЛЬТАТ ПРОВЕРКИ" << endl;
+        cout << string(50, '=') << endl;
+        cout << "Анализируемый массив: ";
+        printArray(arr);
+        cout << endl;
+        cout << "Количество элементов: " << arr.size() << endl;
+        cout << "Состояние массива: " << (result ? "ОТСОРТИРОВАН ПО ВОЗРАСТАНИЮ" : "НЕ ОТСОРТИРОВАН") << endl;
+        
+        cout << "\nАНАЛИЗ СЛОЖНОСТИ" << endl;
+        cout << "Временная сложность: O(n)" << endl;
+        cout << "Пространственная сложность: O(n)" << endl;
+        cout << "Фактическое количество проверок: " << (arr.size() > 1 ? arr.size() - 1 : 0) << endl;
+        
+    } catch (const exception& e) {
+        cout << "Ошибка обработки: убедитесь что введены только целые числа" << endl;
+        return 1;
+    }
+    
+    return 0;
+}
+
+
+
+
+##Код на Java:
+
+
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+
+public class RecursiveArraySortChecker {
+    
+    public static boolean isSorted(int[] arr, int index) {
+        if (arr.length <= 1 || index == arr.length - 1) {
+            return true;
+        }
+        
+        if (arr[index] > arr[index + 1]) {
+            return false;
+        }
+        
+        return isSorted(arr, index + 1);
+    }
+    
+    public static boolean isSorted(int[] arr) {
+        return isSorted(arr, 0);
+    }
+    
+    public static int[] parseInput(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return new int[0];
+        }
+        
+        String[] parts = input.trim().split("\\s+");
+        List<Integer> numbers = new ArrayList<>();
+        
+        for (String part : parts) {
+            try {
+                numbers.add(Integer.parseInt(part));
+            } catch (NumberFormatException e) {
+                System.out.println("Предупреждение: пропущен нечисловой элемент '" + part + "'");
+            }
+        }
+        
+        int[] result = new int[numbers.size()];
+        for (int i = 0; i < numbers.size(); i++) {
+            result[i] = numbers.get(i);
+        }
+        
+        return result;
+    }
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Проверка отсортированности массива рекурсивным методом");
+        System.out.println("Введите элементы целочисленного массива через пробел");
+        System.out.println("Пример ввода: 1 2 3 4 5");
+        System.out.print("Ваш ввод: ");
+        
+        String input = scanner.nextLine();
+        
+        if (input == null || input.trim().isEmpty()) {
+            System.out.println("Ошибка ввода: пустая строка");
+            scanner.close();
+            return;
+        }
+        
+        try {
+            int[] arr = parseInput(input);
+            
+            if (arr.length == 0) {
+                System.out.println("Ошибка: не удалось распознать ни одного целого числа");
+                scanner.close();
+                return;
+            }
+            
+            System.out.println("\nОбработка данных");
+            System.out.println("Получен массив: " + Arrays.toString(arr));
+            System.out.println("Размер массива: " + arr.length + " элементов");
+            
+            System.out.println("Запуск рекурсивной проверки");
+            boolean result = isSorted(arr);
+            
+            System.out.println("\n" + "=".repeat(50));
+            System.out.println("РЕЗУЛЬТАТ ПРОВЕРКИ");
+            System.out.println("=".repeat(50));
+            System.out.println("Анализируемый массив: " + Arrays.toString(arr));
+            System.out.println("Количество элементов: " + arr.length);
+            System.out.println("Состояние массива: " + (result ? "ОТСОРТИРОВАН ПО ВОЗРАСТАНИЮ" : "НЕ ОТСОРТИРОВАН"));
+            
+            System.out.println("\nАНАЛИЗ СЛОЖНОСТИ");
+            System.out.println("Временная сложность: O(n)");
+            System.out.println("Пространственная сложность: O(n)");
+            System.out.println("Фактическое количество проверок: " + (arr.length > 1 ? arr.length - 1 : 0));
+            System.out.println("Рекурсивная глубина: " + (arr.length > 1 ? arr.length - 1 : 0) + " вызовов");
+            
+        } catch (Exception e) {
+            System.out.println("Критическая ошибка: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+}

@@ -1,4 +1,4 @@
-## Код на Python:
+Код на Python:
 
 def is_sorted(arr, index=0):
     if len(arr) <= 1 or index == len(arr) - 1:
@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
 
 
-## Код на С++:
+Код на С++:
 
 
 #include <iostream>
@@ -156,7 +156,7 @@ int main() {
 
 
 
-## Код на Java:
+Код на Java:
 
 
 import java.util.Scanner;
